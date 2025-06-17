@@ -1,7 +1,7 @@
-Tool Life Simulator
+**Tool Life Simulator**
 A modern web application to simulate tool life using uploaded data files, with secure user authentication, admin approval, result downloads, and a polished Bootstrap 5 interface.
 
-🚀 Features
+**🚀 Features**
 Simulate Tool Life: Upload data files, run simulations, and download results.
 
 User Authentication: Register, login, and require admin approval before access.
@@ -18,7 +18,7 @@ Standalone Executable: Easily package and distribute as a Windows .exe using PyI
 
 Automatic Browser Launch: App opens in your default browser on startup.
 
-🛠️ Tech Stack
+**🛠️ Tech Stack**
 Backend Framework: FastAPI
 
 Database: SQLite (via SQLAlchemy ORM)
@@ -48,7 +48,7 @@ tool_simulator_app/
 
 Environment Variables: Loaded from admin.env using python-dotenv
 
-📝 Requirements
+**📝 Requirements**
 Python 3.10 or 3.11 (recommended)
 
 See requirements.txt for all dependencies, including:
