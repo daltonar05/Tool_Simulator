@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tool Life Simulator – Login</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="splash-container">
+    <img src="/static/download-removebg-preview.png" alt="Titan Logo" class="logo">
+    <h1 class="main-title">TOOL LIFE SIMULATOR</h1>
+    <form method="post" action="/login">
+      <input type="text" name="username" class="input-field" placeholder="Username" required>
+      <input type="password" name="password" class="input-field" placeholder="Password" required>
+      <button type="submit" class="primary-button">LOGIN</button>
+      {% if error %}
+      <div class="error-message">{{ error }}</div>
+      {% endif %}
+    </form>
+  </div>
+</body>
+</html>

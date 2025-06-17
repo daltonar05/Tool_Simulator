@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simulation Result</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Simulation Result</h2>
+        <a href="/download/{{ output_filename }}">Download File</a><br><br>
+        <div class="tile-container">
+            {% for component, shops in result.items() %}
+                <div class="tile" onclick="toggleDetails('{{ component }}')">
+                    {{ component }}
+                </div>
+                <div class="details" id="{{ component }}" style="display:none;">
+                    {% for shop, tools in shops.items() %}
+                        <strong>{{ shop }}</strong><br>
+                        <ul>
+                            {% for tool, value in tools.items() %}
+                                <li>{{ tool }}: {{ '%.2f' % value }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<script>
+    function toggleDetails(id) {
+        var x = document.getElementById(id);
+        if (x.style.display === "none") x.style.display = "block";
+        else x.style.display = "none";
+    }
+</script>
+</body>
+</html>

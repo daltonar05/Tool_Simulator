@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+    <h2>Admin Panel</h2>
+    <a href="/">Back to Home</a>
+    <table border="1">
+        <tr>
+            <th>Username</th>
+            <th>Approved</th>
+            <th>Admin</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ "✅" if user.is_approved else "❌" }}</td>
+            <td>{{ "✅" if user.is_admin else "❌" }}</td>
+            <td>
+                {% if not user.is_approved %}
+                <form action="/admin/approve/{{ user.id }}" method="post" style="display:inline;">
+                    <button type="submit">Approve</button>
+                </form>
+                {% endif %}
+                {% if not user.is_admin %}
+                <form action="/admin/make_admin/{{ user.id }}" method="post" style="display:inline;">
+                    <button type="submit">Make Admin</button>
+                </form>
+                {% endif %}
+            </td>
+            <td>
+    {% if not user.is_approved %}
+        <form action="/admin/approve/{{ user.id }}" method="post" style="display:inline;">
+            <button type="submit">Approve</button>
+        </form>
+    {% else %}
+        <form action="/admin/unapprove/{{ user.id }}" method="post" style="display:inline;">
+            <button type="submit">Unapprove</button>
+        </form>
+    {% endif %}
+    {% if not user.is_admin %}
+        <form action="/admin/make_admin/{{ user.id }}" method="post" style="display:inline;">
+            <button type="submit">Make Admin</button>
+        </form>
+    {% else %}
+        <form action="/admin/revoke_admin/{{ user.id }}" method="post" style="display:inline;">
+            <button type="submit">Revoke Admin</button>
+        </form>
+    {% endif %}
+</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
