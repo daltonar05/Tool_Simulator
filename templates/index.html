@@ -1,41 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tool Life Simulator</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="splash-container">
-        <img src="/static/download-removebg-preview.png" alt="Titan Logo" class="logo">
-        <h1 class="main-title">TOOL LIFE SIMULATOR</h1>
-
+{% extends "base.html" %}
+{% block title %}Home - Tool Life Simulator{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-6">
         {% if user %}
             {% if current_user and current_user.is_admin %}
-                <div style="margin-top: 20px;">
-                    <a href="/admin"><button class="primary-button">Go to Admin Portal</button></a>
+                <div class="card shadow text-center p-4">
+                    <h2 class="mb-3 text-primary"><i class="fas fa-crown me-2"></i>Welcome Admin!</h2>
+                    <a href="/admin" class="btn btn-lg btn-primary">Go to Admin Portal</a>
                 </div>
             {% else %}
-                <form method="post" action="/simulate/" enctype="multipart/form-data">
-                    <input type="text" name="planner_name" class="input-field" placeholder="Planner Name" required>
-                    <input type="number" name="pieces" class="input-field" placeholder="No. of Pieces" required>
-                    <input type="file" name="file" class="input-field" required>
-                    <button type="submit" class="primary-button">SIMULATE</button>
-                </form>
+                <div class="card shadow p-4">
+                    <h2 class="mb-3">Simulate Tool Life</h2>
+                    <form method="post" action="/simulate/" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="text" name="planner_name" class="form-control" placeholder="Planner Name" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" name="pieces" class="form-control" placeholder="No. of Pieces" required />
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" name="file" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">SIMULATE</button>
+                    </form>
+                </div>
             {% endif %}
         {% else %}
-            <div class="button-group">
-                <a href="/login"><button class="splash-button">LOGIN</button></a>
-                <a href="/register"><button class="splash-button">REGISTER</button></a>
+            <div class="card shadow text-center p-4">
+                <h2 class="mb-3">Welcome to Tool Life Simulator</h2>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="/login" class="btn btn-primary btn-lg">Login</a>
+                    <a href="/register" class="btn btn-outline-primary btn-lg">Register</a>
+                </div>
             </div>
         {% endif %}
-        
-        {% if user %}
-    <form action="/logout" method="post" style="display:inline;" class="logoutButton">
-        <button type="submit" class="splash-button">Logout</button>
-    </form>
-{% endif %}
-
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

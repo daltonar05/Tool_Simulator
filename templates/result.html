@@ -1,32 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Simulation Result</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="container">
+{% extends "base.html" %}
+{% block title %}Simulation Result - Tool Life Simulator{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="text-center mb-4">
         <h2>Simulation Result</h2>
-        <a href="/download/{{ output_filename }}">Download File</a><br><br>
-        <div class="tile-container">
-            {% for component, shops in result.items() %}
-                <div class="tile" onclick="toggleDetails('{{ component }}')">
-                    {{ component }}
-                </div>
-                <div class="details" id="{{ component }}" style="display:none;">
-                    {% for shop, tools in shops.items() %}
-                        <strong>{{ shop }}</strong><br>
-                        <ul>
-                            {% for tool, value in tools.items() %}
-                                <li>{{ tool }}: {{ '%.2f' % value }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
-                </div>
-            {% endfor %}
-        </div>
+        <a href="/download/{{ output_filename }}" class="btn btn-success my-2">
+            <i class="fas fa-download me-2"></i>Download File
+        </a>
     </div>
-
+    <div class="row justify-content-center">
+        {% for component, shops in result.items() %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white" style="cursor:pointer;" onclick="toggleDetails('{{ component }}')">
+                        <strong>{{ component }}</strong>
+                    </div>
+                    <div class="card-body details" id="{{ component }}" style="display:none;">
+                        {% for shop, tools in shops.items() %}
+                            <strong>{{ shop }}</strong><br>
+                            <ul class="list-group list-group-flush mb-3">
+                                {% for tool, value in tools.items() %}
+                                    <li class="list-group-item">{{ tool }}: {{ '%.2f' % value }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
 <script>
     function toggleDetails(id) {
         var x = document.getElementById(id);
@@ -34,5 +39,4 @@
         else x.style.display = "none";
     }
 </script>
-</body>
-</html>
+{% endblock %}
